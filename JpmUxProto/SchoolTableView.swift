@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol SchoolTableViewDelegate {
+    func mainGetData()
+    func mainSchoolTvRefresh()
+}
+
 class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
+    var schoolTableViewDelegate: SchoolTableViewDelegate?
     
+    let api = Api.share
     let tool = Tool.share
     
     let schoolTvRc = UIRefreshControl()
@@ -38,6 +45,7 @@ class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     @objc private func tablevRefresh(_ sender: Any) {
         schoolTvRc.endRefreshing()
+        schoolTableViewDelegate?.mainSchoolTvRefresh()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -67,17 +75,26 @@ class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return api.apiArrSchools.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let school = api.apiArrSchools[indexPath.row]
+        
         let cell:SchoolTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "SchoolTableViewCell", for: indexPath) as? SchoolTableViewCell)!
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
+        cell.schoolTvcNameLb.text = school.school_name
+        cell.schoolTvcInfoLb.text = school.neighborhood
+        
+        if indexPath.row == api.apiArrSchools.count - 1 {
+            schoolTableViewDelegate?.mainGetData()
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        print("Coco")
     }
 }

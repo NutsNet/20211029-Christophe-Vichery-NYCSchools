@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, SchoolTableViewDelegate {
     let api = Api.share
     let tool = Tool.share
     let spin = SpinView.share
@@ -19,13 +19,15 @@ class MainViewController: UIViewController {
     
     var htMainFxCst: NSLayoutConstraint!
     
+    private var mainQueue = DispatchQueue(label: "main.queue")
+    
     override var prefersStatusBarHidden: Bool { return true }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Notification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.protoUpdateOrientation), name: NSNotification.Name(rawValue: "updateOrientation"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.mainUpdateOrientation), name: NSNotification.Name(rawValue: "updateOrientation"), object: nil)
         
         // Self
         view.backgroundColor = .white
@@ -47,6 +49,7 @@ class MainViewController: UIViewController {
         
         // Table
         mainSchoolTv.alpha = 0
+        mainSchoolTv.schoolTableViewDelegate = self
         view.addSubview(mainSchoolTv)
         
         let hlMainSchoolTvCst = NSLayoutConstraint(item: mainSchoolTv, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
@@ -100,11 +103,11 @@ class MainViewController: UIViewController {
         let vbSpinViCst  = NSLayoutConstraint(item: spin, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         NSLayoutConstraint.activate([hlSpinViCst, hrSpinViCst, vtSpinViCst, vbSpinViCst])
         
-        protoUpdateOrientation()
-        protoStart()
+        mainUpdateOrientation()
+        mainStart()
     }
     
-    @objc private func protoUpdateOrientation() {
+    @objc private func mainUpdateOrientation() {
         var htMainFx: CGFloat = 96
         if tool.orientation == .landscape {
             htMainFx = 64
@@ -116,31 +119,44 @@ class MainViewController: UIViewController {
         htMainFxCst = NSLayoutConstraint(item: mainFx, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: htMainFx)
         NSLayoutConstraint.activate([htMainFxCst])
         
-        mainSchoolTv.reloadData()
     }
     
-    private func protoStart() {
-        protoUpdateOrientation()
+    private func mainStart() {
+        mainUpdateOrientation()
         
         UIView.animate(withDuration: 0.5, delay: 0.25, options: .curveEaseIn, animations: { () -> Void in
             self.mainLogoIv.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi)
             self.mainLogoIv.transform = CGAffineTransform.init(scaleX: 0.0001, y: 0.0001)
         }) { (finished) -> Void in
-            self.protoGetData()
+            self.spin.spinStart()
+            self.mainGetData()
         }
     }
     
-    private func protoGetData() {
-        spin.spinStart()
-        api.getSchools(offset: 0, limit: 50) {
-            self.mainSchoolTv.reloadData()
-            self.spin.spinStop() {
-                UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { () -> Void in
-                    self.mainFx.alpha = 1
-                    self.mainTitleLb.alpha = 1
-                    self.mainSchoolTv.alpha = 1
-                }) { (finished) -> Void in }
+    // SchoolTableViewDelegate
+    func mainGetData() {
+        mainQueue.async {
+            self.api.getSchools() { error in
+                DispatchQueue.main.async {
+                    self.mainSchoolTv.reloadData()
+                    if self.spin.isSpining {
+                        self.spin.spinStop() {
+                            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { () -> Void in
+                                self.mainFx.alpha = 1
+                                self.mainTitleLb.alpha = 1
+                                self.mainSchoolTv.alpha = 1
+                            }) { (finished) -> Void in }
+                        }
+                    }
+                }
             }
         }
+    }
+    
+    func mainSchoolTvRefresh() {
+        api.apiPageOfSchool = 0
+        api.apiArrSchools.removeAll()
+        mainSchoolTv.reloadData()
+        mainGetData()
     }
 }

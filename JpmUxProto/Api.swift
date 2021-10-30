@@ -16,7 +16,10 @@ class Api: NSObject {
     // Secret Token   : apv-W4OvX4s9rCRl1LeZysQN4taaUbXVGnkp
     let client = SODAClient(domain: "data.cityofnewyork.us", token: "kxrLlGkyYy9OEFle4gtSFZKy2")
     
-    private var queue = DispatchQueue(label: "api.queue")
+    var apiArrSchools = [School]()
+    
+    var apiPageOfSchool = 0
+    let apiPageLimit = 13
     
     static let share = Api()
     
@@ -24,13 +27,33 @@ class Api: NSObject {
         super.init()
     }
     
-    func getSchools(offset: Int, limit: Int, escap:@escaping () -> Void) {
-        let school_name = client.query(dataset: "s3k6-pzi2")
+    func getSchools(escap:@escaping (String) -> Void) {
+        let query = client.query(dataset: "s3k6-pzi2")
         
-        queue.async {
-            school_name.offset(offset).limit(limit).get { result in
-                //print(result)
-                escap()
+        let limit = self.apiPageLimit
+        let offset = self.apiPageOfSchool*limit
+        query.offset(offset).limit(limit).get { result in
+            switch result {
+            case .dataset(let dataset):
+                if dataset.count > 0 {
+                    for data in dataset {
+                        let school = School()
+                        
+                        if let school_name = data["school_name"] as? String { school.school_name = school_name }
+                        if let neighborhood = data["neighborhood"] as? String { school.neighborhood = neighborhood }
+                        
+                        self.apiArrSchools.append(school)
+                    }
+                    print(self.apiArrSchools.count)
+                    self.apiPageOfSchool += 1
+                    
+                    escap("")
+                }
+                break
+            case .error(let error):
+                print("Error in getSchools: \(error.localizedDescription)")
+                escap(error.localizedDescription)
+                break
             }
         }
     }
