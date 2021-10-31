@@ -21,3 +21,9 @@
         
 // device = .xPhone
 ```
+## ✨ How work the app
+- launch the app
+- the main view will load in a table the 25 first schools
+- when scrolling at the end of the table, it will fetch 25 more schools
+- if you click on one of these cells a view controller will show more details about the school
+- when the detail view controller will appear we will fetch and display the SATs about that school
