@@ -28,7 +28,7 @@ class Api: NSObject {
     }
     
     // Get schools with pagination to update the array of schools
-    func apiGetSchools(escap:@escaping () -> Void) {
+    func apiGetSchools(escap:@escaping (String) -> Void) {
         let limit = self.apiPageLimit
         let offset = self.apiPageOfSchool*limit
         
@@ -55,11 +55,12 @@ class Api: NSObject {
                     
                     self.apiPageOfSchool += 1
                     
-                    escap()
+                    escap("")
                 }
                 break
             case .error(let error):
                 print("Error in getSchools: \(error.localizedDescription)")
+                escap(error.localizedDescription)
                 break
             }
         }

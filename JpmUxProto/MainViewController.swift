@@ -19,6 +19,8 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
     
     var htMainFxCst: NSLayoutConstraint!
     
+    var mainCurrentAlert: AlertView?
+    
     private var mainQueue = DispatchQueue(label: "main.queue")
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -134,21 +136,51 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         }
     }
     
+    // Display alert
+    private func mainDisplayAlert(nb: UInt, txt: String) {
+        view.endEditing(true)
+        
+        let alertVi = AlertView()
+        alertVi.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alertVi)
+        
+        let hlAlertCst = NSLayoutConstraint(item: alertVi, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 0)
+        let hrAlertCst = NSLayoutConstraint(item: alertVi, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: 0)
+        let vtAlertCst = NSLayoutConstraint(item: alertVi, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
+        let vbAlertCst = NSLayoutConstraint(item: alertVi, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activate([hlAlertCst, hrAlertCst, vtAlertCst, vbAlertCst])
+        
+        if mainCurrentAlert == nil {
+            mainCurrentAlert = AlertView()
+            alertVi.alertDisplay(nb: nb, txt: txt)
+            mainCurrentAlert = alertVi
+        } else {
+            mainCurrentAlert?.alertDismiss {
+                alertVi.alertDisplay(nb: nb, txt: txt)
+                self.mainCurrentAlert = alertVi
+            }
+        }
+    }
+    
     // SchoolTableViewDelegate
     
     // Get schools with pagination
     func mainGetData() {
         mainQueue.async {
-            self.api.apiGetSchools() {
+            self.api.apiGetSchools() { error in
                 DispatchQueue.main.async {
-                    self.mainSchoolTv.reloadData()
-                    if self.spin.isSpining {
-                        self.spin.spinStop() {
-                            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { () -> Void in
-                                self.mainFx.alpha = 1
-                                self.mainTitleLb.alpha = 1
-                                self.mainSchoolTv.alpha = 1
-                            }) { (finished) -> Void in }
+                    if error != "" {
+                        self.mainDisplayAlert(nb: 1, txt: error)
+                    } else {
+                        self.mainSchoolTv.reloadData()
+                        if self.spin.isSpining {
+                            self.spin.spinStop() {
+                                UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: { () -> Void in
+                                    self.mainFx.alpha = 1
+                                    self.mainTitleLb.alpha = 1
+                                    self.mainSchoolTv.alpha = 1
+                                }) { (finished) -> Void in }
+                            }
                         }
                     }
                 }
