@@ -109,6 +109,7 @@ class AlertView: UIView {
         alertBackVi.transform = CGAffineTransform(scaleX: 0, y: 0)
     }
     
+    // Display alert message
     func alertDisplay(nb: UInt, txt: String) {
         alertNb = nb
         
@@ -145,6 +146,7 @@ class AlertView: UIView {
         }
     }
     
+    // Dismiss alert message
     func alertDismiss(escap: @escaping () -> Void) {
         UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: { () -> Void in
             self.backgroundColor = UIColor(rgb: 0x000000, a: 0)
@@ -162,6 +164,7 @@ class AlertView: UIView {
         }
     }
     
+    // Handle first button of alert box
     @objc func alertStBtTouch(sender: UIButton!) {
         alertDismiss {
             switch self.alertNb {
@@ -171,6 +174,7 @@ class AlertView: UIView {
         }
     }
     
+    // Handle second button of alert box
     @objc func alertNdBtTouch(sender: UIButton!) {
         alertDismiss {
             switch self.alertNb {
