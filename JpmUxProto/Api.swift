@@ -19,7 +19,7 @@ class Api: NSObject {
     var apiArrSchools = [School]()
     
     var apiPageOfSchool = 0
-    let apiPageLimit = 13
+    let apiPageLimit = 25
     
     static let share = Api()
     
