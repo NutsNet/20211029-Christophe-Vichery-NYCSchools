@@ -20,4 +20,5 @@ class School: NSObject {
     var sat_critical_reading_avg_score: String = ""
     var sat_writing_avg_score: String = ""
     var sat_math_avg_score: String = ""
+    var isSATLoaded = false
 }

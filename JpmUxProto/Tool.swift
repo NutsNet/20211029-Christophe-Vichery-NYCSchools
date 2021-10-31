@@ -62,7 +62,7 @@ class Tool: NSObject {
             }
         }
         
-        // Set the device type when using simulateur
+        // Set the device type when using simulator
         // iPad  : old iPad   with bottom home button
         // iPhone: old iPhone with bottom home button
         // xPad  : new iPad   with bottom home bar

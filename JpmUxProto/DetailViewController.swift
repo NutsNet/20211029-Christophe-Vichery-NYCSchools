@@ -34,13 +34,17 @@ class DetailViewController: UIViewController {
     let detailMathLb = UILabel()
     
     var detailSchool = School()
+    var detailSchoolIdx = 0
+    
+    var detailDidAppear = false
     
     private var detailQueue = DispatchQueue(label: "detail.queue")
     
-    convenience init(school: School) {
+    convenience init(school: School, idx: Int) {
         self.init()
         
         self.detailSchool = school
+        self.detailSchoolIdx = idx
     }
     
     override func viewDidLoad() {
@@ -300,26 +304,49 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hlDetailMathLbCst, vtDetailMathLbCst])
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        detailQueue.async {
-            DispatchQueue.main.async {
-                self.api.apiGetSats(dbn: self.detailSchool.dbn) { school in
-                    if school.dbn == "" {
-                        self.detailTakersLb.text! += "no data"
-                        self.detailReadingLb.text! += "no data"
-                        self.detailWritingLb.text! += "no data"
-                        self.detailMathLb.text! += "no data"
+        if !detailDidAppear {
+            detailQueue.async {
+                DispatchQueue.main.async {
+                    if self.api.apiArrSchools[self.detailSchoolIdx].isSATLoaded {
+                        self.detailTakersLb.text! += self.api.apiArrSchools[self.detailSchoolIdx].num_of_sat_test_takers
+                        self.detailReadingLb.text! += self.api.apiArrSchools[self.detailSchoolIdx].sat_critical_reading_avg_score
+                        self.detailWritingLb.text! += self.api.apiArrSchools[self.detailSchoolIdx].sat_writing_avg_score
+                        self.detailMathLb.text! += self.api.apiArrSchools[self.detailSchoolIdx].sat_math_avg_score
                     } else {
-                        self.detailTakersLb.text! += school.num_of_sat_test_takers
-                        self.detailReadingLb.text! += school.sat_critical_reading_avg_score
-                        self.detailWritingLb.text! += school.sat_writing_avg_score
-                        self.detailMathLb.text! += school.sat_math_avg_score
+                        self.api.apiGetSats(dbn: self.detailSchool.dbn) { school in
+                            if school.dbn == "" {
+                                self.detailTakersLb.text! += "no data"
+                                self.detailReadingLb.text! += "no data"
+                                self.detailWritingLb.text! += "no data"
+                                self.detailMathLb.text! += "no data"
+                                
+                                self.api.apiArrSchools[self.detailSchoolIdx].num_of_sat_test_takers = "no data"
+                                self.api.apiArrSchools[self.detailSchoolIdx].sat_critical_reading_avg_score = "no data"
+                                self.api.apiArrSchools[self.detailSchoolIdx].sat_writing_avg_score = "no data"
+                                self.api.apiArrSchools[self.detailSchoolIdx].sat_math_avg_score = "no data"
+                            } else {
+                                self.detailTakersLb.text! += school.num_of_sat_test_takers
+                                self.detailReadingLb.text! += school.sat_critical_reading_avg_score
+                                self.detailWritingLb.text! += school.sat_writing_avg_score
+                                self.detailMathLb.text! += school.sat_math_avg_score
+                                
+                                self.api.apiArrSchools[self.detailSchoolIdx].num_of_sat_test_takers = school.num_of_sat_test_takers
+                                self.api.apiArrSchools[self.detailSchoolIdx].sat_critical_reading_avg_score = school.sat_critical_reading_avg_score
+                                self.api.apiArrSchools[self.detailSchoolIdx].sat_writing_avg_score = school.sat_writing_avg_score
+                                self.api.apiArrSchools[self.detailSchoolIdx].sat_math_avg_score = school.sat_math_avg_score
+                            }
+                            
+                            self.api.apiArrSchools[self.detailSchoolIdx].isSATLoaded = true
+                        }
                     }
                 }
             }
         }
+        
+        detailDidAppear = true
     }
     
     @objc func detailUpdateOrientation() {

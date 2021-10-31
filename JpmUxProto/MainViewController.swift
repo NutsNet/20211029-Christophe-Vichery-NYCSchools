@@ -153,8 +153,8 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         }
     }
     
-    func mainOpenSchool(school: School) {
-        let detailVc = DetailViewController(school: school)
+    func mainOpenSchool(school: School, idx: Int) {
+        let detailVc = DetailViewController(school: school, idx: idx)
         detailVc.modalPresentationStyle = .formSheet
         detailVc.modalTransitionStyle = .coverVertical
         self.present(detailVc, animated: true, completion: { detailVc.detailUpdateOrientation() })
