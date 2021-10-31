@@ -75,8 +75,6 @@ class Api: NSObject {
                 if dataset.count == 1 {
                     let data = dataset[0]
                     
-                    print(data)
-                    
                     if let dbn = data["dbn"] as? String { school.dbn = dbn }
                     if let school_name = data["school_name"] as? String { school.school_name = school_name }
                     if let num_of_sat_test_takers = data["num_of_sat_test_takers"] as? String { school.num_of_sat_test_takers = num_of_sat_test_takers }

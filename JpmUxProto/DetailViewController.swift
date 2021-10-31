@@ -35,6 +35,8 @@ class DetailViewController: UIViewController {
     
     var detailSchool = School()
     
+    private var detailQueue = DispatchQueue(label: "detail.queue")
+    
     convenience init(school: School) {
         self.init()
         
@@ -243,10 +245,9 @@ class DetailViewController: UIViewController {
         detailTakersLb.layer.shadowRadius = 4
         detailSv.addSubview(detailTakersLb)
         
-        let hlDetailTakersLbCst = NSLayoutConstraint(item: detailTakersLb, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 48)
-        let hrDetailTakersLbCst = NSLayoutConstraint(item: detailTakersLb, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -48)
+        let hcDetailTakersLbCst = NSLayoutConstraint(item: detailTakersLb, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
         let vtDetailTakersLbCst = NSLayoutConstraint(item: detailTakersLb, attribute: .top, relatedBy: .equal, toItem: detailOverviewLb, attribute: .bottom, multiplier: 1, constant: 32)
-        NSLayoutConstraint.activate([hlDetailTakersLbCst, hrDetailTakersLbCst, vtDetailTakersLbCst])
+        NSLayoutConstraint.activate([hcDetailTakersLbCst, vtDetailTakersLbCst])
         
         // SAT Reading
         detailReadingLb.text = "SAT Reading Avg. Score : "
@@ -258,10 +259,9 @@ class DetailViewController: UIViewController {
         detailReadingLb.layer.shadowRadius = 4
         detailSv.addSubview(detailReadingLb)
         
-        let hlDetailReadingLbCst = NSLayoutConstraint(item: detailReadingLb, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 48)
-        let hrDetailReadingLbCst = NSLayoutConstraint(item: detailReadingLb, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -48)
+        let hlDetailReadingLbCst = NSLayoutConstraint(item: detailReadingLb, attribute: .left, relatedBy: .equal, toItem: detailTakersLb, attribute: .left, multiplier: 1, constant: 0)
         let vtDetailReadingLbCst = NSLayoutConstraint(item: detailReadingLb, attribute: .top, relatedBy: .equal, toItem: detailTakersLb, attribute: .bottom, multiplier: 1, constant: 8)
-        NSLayoutConstraint.activate([hlDetailReadingLbCst, hrDetailReadingLbCst, vtDetailReadingLbCst])
+        NSLayoutConstraint.activate([hlDetailReadingLbCst, vtDetailReadingLbCst])
         
         // SAT Writing
         detailWritingLb.text = "SAT Writing  Avg. Score : "
@@ -273,10 +273,9 @@ class DetailViewController: UIViewController {
         detailWritingLb.layer.shadowRadius = 4
         detailSv.addSubview(detailWritingLb)
         
-        let hlDetailWritingLbCst = NSLayoutConstraint(item: detailWritingLb, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 48)
-        let hrDetailWritingLbCst = NSLayoutConstraint(item: detailWritingLb, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -48)
+        let hlDetailWritingLbCst = NSLayoutConstraint(item: detailWritingLb, attribute: .left, relatedBy: .equal, toItem: detailTakersLb, attribute: .left, multiplier: 1, constant: 0)
         let vtDetailWritingLbCst = NSLayoutConstraint(item: detailWritingLb, attribute: .top, relatedBy: .equal, toItem: detailReadingLb, attribute: .bottom, multiplier: 1, constant: 8)
-        NSLayoutConstraint.activate([hlDetailWritingLbCst, hrDetailWritingLbCst, vtDetailWritingLbCst])
+        NSLayoutConstraint.activate([hlDetailWritingLbCst, vtDetailWritingLbCst])
         
         // SAT Math
         detailMathLb.text = "SAT Math       Avg. Score : "
@@ -288,26 +287,29 @@ class DetailViewController: UIViewController {
         detailMathLb.layer.shadowRadius = 4
         detailSv.addSubview(detailMathLb)
         
-        let hlDetailMathLbCst = NSLayoutConstraint(item: detailMathLb, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: 48)
-        let hrDetailMathLbCst = NSLayoutConstraint(item: detailMathLb, attribute: .right, relatedBy: .equal, toItem: view, attribute: .right, multiplier: 1, constant: -48)
+        let hlDetailMathLbCst = NSLayoutConstraint(item: detailMathLb, attribute: .left, relatedBy: .equal, toItem: detailTakersLb, attribute: .left, multiplier: 1, constant: 0)
         let vtDetailMathLbCst = NSLayoutConstraint(item: detailMathLb, attribute: .top, relatedBy: .equal, toItem: detailWritingLb, attribute: .bottom, multiplier: 1, constant: 8)
-        NSLayoutConstraint.activate([hlDetailMathLbCst, hrDetailMathLbCst, vtDetailMathLbCst])
+        NSLayoutConstraint.activate([hlDetailMathLbCst, vtDetailMathLbCst])
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        api.apiGetSats(dbn: detailSchool.dbn) { school in
-            if school.dbn == "" {
-                self.detailTakersLb.text! += "no data"
-                self.detailReadingLb.text! += "no data"
-                self.detailWritingLb.text! += "no data"
-                self.detailMathLb.text! += "no data"
-            } else {
-                self.detailTakersLb.text! += school.num_of_sat_test_takers
-                self.detailReadingLb.text! += school.sat_critical_reading_avg_score
-                self.detailWritingLb.text! += school.sat_writing_avg_score
-                self.detailMathLb.text! += school.sat_math_avg_score
+        detailQueue.async {
+            DispatchQueue.main.async {
+                self.api.apiGetSats(dbn: self.detailSchool.dbn) { school in
+                    if school.dbn == "" {
+                        self.detailTakersLb.text! += "no data"
+                        self.detailReadingLb.text! += "no data"
+                        self.detailWritingLb.text! += "no data"
+                        self.detailMathLb.text! += "no data"
+                    } else {
+                        self.detailTakersLb.text! += school.num_of_sat_test_takers
+                        self.detailReadingLb.text! += school.sat_critical_reading_avg_score
+                        self.detailWritingLb.text! += school.sat_writing_avg_score
+                        self.detailMathLb.text! += school.sat_math_avg_score
+                    }
+                }
             }
         }
     }
