@@ -13,6 +13,7 @@
 		C685D299272D9F200063F284 /* school.png in Resources */ = {isa = PBXBuildFile; fileRef = C685D298272D9F200063F284 /* school.png */; };
 		C685D29B272DD1220063F284 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = C685D29A272DD1220063F284 /* School.swift */; };
 		C685D29D272DF4F90063F284 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C685D29C272DF4F90063F284 /* DetailViewController.swift */; };
+		C685D2A5272EFFAD0063F284 /* JpmUxProtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C685D2A4272EFFAD0063F284 /* JpmUxProtoTests.swift */; };
 		C6CD9B97272BA00F00B51256 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CD9B96272BA00F00B51256 /* logo.png */; };
 		C6CD9BA3272BA07600B51256 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6CD9B99272BA07600B51256 /* Lato-BlackItalic.ttf */; };
 		C6CD9BA4272BA07600B51256 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6CD9B9A272BA07600B51256 /* Lato-Thin.ttf */; };
@@ -35,6 +36,16 @@
 		C6DBB364272B9C3700B63C1B /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DBB363272B9C3700B63C1B /* Tool.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C685D2A6272EFFAD0063F284 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6DBB33F272B963400B63C1B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6DBB346272B963400B63C1B;
+			remoteInfo = JpmUxProto;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		C685D292272CB2080063F284 /* SODAClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SODAClient.swift; sourceTree = "<group>"; };
 		C685D294272CEA1D0063F284 /* SchoolTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableView.swift; sourceTree = "<group>"; };
@@ -42,6 +53,8 @@
 		C685D298272D9F200063F284 /* school.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school.png; sourceTree = "<group>"; };
 		C685D29A272DD1220063F284 /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
 		C685D29C272DF4F90063F284 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C685D2A2272EFFAD0063F284 /* JpmUxProtoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JpmUxProtoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C685D2A4272EFFAD0063F284 /* JpmUxProtoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JpmUxProtoTests.swift; sourceTree = "<group>"; };
 		C6CD9B96272BA00F00B51256 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		C6CD9B99272BA07600B51256 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		C6CD9B9A272BA07600B51256 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
@@ -67,6 +80,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C685D29F272EFFAD0063F284 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6DBB344272B963400B63C1B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,6 +102,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C685D2A3272EFFAD0063F284 /* JpmUxProtoTests */ = {
+			isa = PBXGroup;
+			children = (
+				C685D2A4272EFFAD0063F284 /* JpmUxProtoTests.swift */,
+			);
+			path = JpmUxProtoTests;
 			sourceTree = "<group>";
 		};
 		C6CD9B95272B9FC100B51256 /* Gfx */ = {
@@ -117,6 +145,7 @@
 				C6DBB349272B963400B63C1B /* JpmUxProto */,
 				C6CD9B98272BA01E00B51256 /* Font */,
 				C6CD9B95272B9FC100B51256 /* Gfx */,
+				C685D2A3272EFFAD0063F284 /* JpmUxProtoTests */,
 				C6DBB348272B963400B63C1B /* Products */,
 				B4E43C26E35B3DA9A5135B1E /* Frameworks */,
 			);
@@ -126,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				C6DBB347272B963400B63C1B /* JpmUxProto.app */,
+				C685D2A2272EFFAD0063F284 /* JpmUxProtoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,6 +184,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C685D2A1272EFFAD0063F284 /* JpmUxProtoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C685D2AA272EFFAD0063F284 /* Build configuration list for PBXNativeTarget "JpmUxProtoTests" */;
+			buildPhases = (
+				C685D29E272EFFAD0063F284 /* Sources */,
+				C685D29F272EFFAD0063F284 /* Frameworks */,
+				C685D2A0272EFFAD0063F284 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C685D2A7272EFFAD0063F284 /* PBXTargetDependency */,
+			);
+			name = JpmUxProtoTests;
+			productName = JpmUxProtoTests;
+			productReference = C685D2A2272EFFAD0063F284 /* JpmUxProtoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C6DBB346272B963400B63C1B /* JpmUxProto */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6DBB35B272B963500B63C1B /* Build configuration list for PBXNativeTarget "JpmUxProto" */;
@@ -181,6 +229,10 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					C685D2A1272EFFAD0063F284 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = C6DBB346272B963400B63C1B;
+					};
 					C6DBB346272B963400B63C1B = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -200,11 +252,19 @@
 			projectRoot = "";
 			targets = (
 				C6DBB346272B963400B63C1B /* JpmUxProto */,
+				C685D2A1272EFFAD0063F284 /* JpmUxProtoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C685D2A0272EFFAD0063F284 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6DBB345272B963400B63C1B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +290,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C685D29E272EFFAD0063F284 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C685D2A5272EFFAD0063F284 /* JpmUxProtoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C6DBB343272B963400B63C1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +318,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C685D2A7272EFFAD0063F284 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6DBB346272B963400B63C1B /* JpmUxProto */;
+			targetProxy = C685D2A6272EFFAD0063F284 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		C6DBB355272B963500B63C1B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -262,6 +338,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C685D2A8272EFFAD0063F284 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K5M2Q5H76U;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.nutsnet.JpmUxProtoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JpmUxProto.app/JpmUxProto";
+			};
+			name = Debug;
+		};
+		C685D2A9272EFFAD0063F284 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K5M2Q5H76U;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.nutsnet.JpmUxProtoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JpmUxProto.app/JpmUxProto";
+			};
+			name = Release;
+		};
 		C6DBB359272B963500B63C1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -313,7 +435,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -368,7 +490,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -441,6 +563,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C685D2AA272EFFAD0063F284 /* Build configuration list for PBXNativeTarget "JpmUxProtoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C685D2A8272EFFAD0063F284 /* Debug */,
+				C685D2A9272EFFAD0063F284 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C6DBB342272B963400B63C1B /* Build configuration list for PBXProject "JpmUxProto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

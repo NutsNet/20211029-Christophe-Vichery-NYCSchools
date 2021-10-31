@@ -119,7 +119,6 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         NSLayoutConstraint.deactivate([htMainFxCst])
         htMainFxCst = NSLayoutConstraint(item: mainFx, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: htMainFx)
         NSLayoutConstraint.activate([htMainFxCst])
-        
     }
     
     // Start the app
