@@ -143,9 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				C6DBB349272B963400B63C1B /* JpmUxProto */,
+				C685D2A3272EFFAD0063F284 /* JpmUxProtoTests */,
 				C6CD9B98272BA01E00B51256 /* Font */,
 				C6CD9B95272B9FC100B51256 /* Gfx */,
-				C685D2A3272EFFAD0063F284 /* JpmUxProtoTests */,
 				C6DBB348272B963400B63C1B /* Products */,
 				B4E43C26E35B3DA9A5135B1E /* Frameworks */,
 			);
