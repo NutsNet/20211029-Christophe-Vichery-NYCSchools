@@ -27,32 +27,69 @@ class Api: NSObject {
         super.init()
     }
     
-    func getSchools(escap:@escaping (String) -> Void) {
-        let query = client.query(dataset: "s3k6-pzi2")
-        
+    func apiGetSchools(escap:@escaping () -> Void) {
         let limit = self.apiPageLimit
         let offset = self.apiPageOfSchool*limit
-        query.offset(offset).limit(limit).get { result in
+        
+        let query = client.query(dataset: "s3k6-pzi2").offset(offset).limit(limit)
+        
+        query.get { result in
             switch result {
             case .dataset(let dataset):
                 if dataset.count > 0 {
                     for data in dataset {
                         let school = School()
                         
+                        if let dbn = data["dbn"] as? String { school.dbn = dbn }
                         if let school_name = data["school_name"] as? String { school.school_name = school_name }
                         if let neighborhood = data["neighborhood"] as? String { school.neighborhood = neighborhood }
+                        if let location = data["location"] as? String { school.location = location }
+                        if let website = data["website"] as? String { school.website = website }
+                        if let school_email = data["school_email"] as? String { school.school_email = school_email }
+                        if let phone_number = data["phone_number"] as? String { school.phone_number = phone_number }
+                        if let overview_paragraph = data["overview_paragraph"] as? String { school.overview_paragraph = overview_paragraph }
                         
                         self.apiArrSchools.append(school)
                     }
-                    print(self.apiArrSchools.count)
+                    
                     self.apiPageOfSchool += 1
                     
-                    escap("")
+                    escap()
                 }
                 break
             case .error(let error):
                 print("Error in getSchools: \(error.localizedDescription)")
-                escap(error.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    func apiGetSats(dbn: String, escap:@escaping (School) -> Void) {
+        let query = client.query(dataset: "f9bf-2cp4").filterColumn("dbn", "\(dbn)")
+        
+        query.get { result in
+            switch result {
+            case .dataset(let dataset):
+                let school = School()
+                
+                if dataset.count == 1 {
+                    let data = dataset[0]
+                    
+                    print(data)
+                    
+                    if let dbn = data["dbn"] as? String { school.dbn = dbn }
+                    if let school_name = data["school_name"] as? String { school.school_name = school_name }
+                    if let num_of_sat_test_takers = data["num_of_sat_test_takers"] as? String { school.num_of_sat_test_takers = num_of_sat_test_takers }
+                    if let sat_critical_reading_avg_score = data["sat_critical_reading_avg_score"] as? String { school.sat_critical_reading_avg_score = sat_critical_reading_avg_score }
+                    if let sat_writing_avg_score = data["sat_writing_avg_score"] as? String { school.sat_writing_avg_score = sat_writing_avg_score }
+                    if let sat_math_avg_score = data["sat_math_avg_score"] as? String { school.sat_math_avg_score = sat_math_avg_score }
+                }
+                
+                escap(school)
+                break
+            case .error(let error):
+                print("Error in getSats: \(error.localizedDescription)")
+                escap(School())
                 break
             }
         }

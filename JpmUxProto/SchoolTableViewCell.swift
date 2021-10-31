@@ -71,7 +71,6 @@ class SchoolTableViewCell: UITableViewCell {
         
         // Name
         schoolTvcNameLb.numberOfLines = 2
-        schoolTvcNameLb.text = "Name of the school"
         schoolTvcNameLb.textColor = .darkGray
         schoolTvcNameLb.font =  UIFont(name: "Lato-Bold", size: 16)
         schoolTvcNameLb.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +86,6 @@ class SchoolTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([htSchoolTvcNameLbCst, hlSchoolTvcNameLbCst, hrSchoolTvcNameLbCst, vtSchoolTvcNameLbCst])
         
         // Info
-        schoolTvcInfoLb.text = "Neighborhood"
         schoolTvcInfoLb.textColor = .darkGray
         schoolTvcInfoLb.font =  UIFont(name: "Lato-Italic", size: 14)
         schoolTvcInfoLb.translatesAutoresizingMaskIntoConstraints = false

@@ -10,6 +10,7 @@ import UIKit
 protocol SchoolTableViewDelegate {
     func mainGetData()
     func mainSchoolTvRefresh()
+    func mainOpenSchool(school: School)
 }
 
 class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
@@ -95,6 +96,6 @@ class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Coco")
+        schoolTableViewDelegate?.mainOpenSchool(school: api.apiArrSchools[indexPath.row])
     }
 }

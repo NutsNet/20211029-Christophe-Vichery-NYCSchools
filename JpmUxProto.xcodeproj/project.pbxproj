@@ -13,6 +13,7 @@
 		C685D297272CEADA0063F284 /* SchoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C685D296272CEADA0063F284 /* SchoolTableViewCell.swift */; };
 		C685D299272D9F200063F284 /* school.png in Resources */ = {isa = PBXBuildFile; fileRef = C685D298272D9F200063F284 /* school.png */; };
 		C685D29B272DD1220063F284 /* School.swift in Sources */ = {isa = PBXBuildFile; fileRef = C685D29A272DD1220063F284 /* School.swift */; };
+		C685D29D272DF4F90063F284 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C685D29C272DF4F90063F284 /* DetailViewController.swift */; };
 		C6CD9B97272BA00F00B51256 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CD9B96272BA00F00B51256 /* logo.png */; };
 		C6CD9BA3272BA07600B51256 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6CD9B99272BA07600B51256 /* Lato-BlackItalic.ttf */; };
 		C6CD9BA4272BA07600B51256 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6CD9B9A272BA07600B51256 /* Lato-Thin.ttf */; };
@@ -43,6 +44,7 @@
 		C685D296272CEADA0063F284 /* SchoolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolTableViewCell.swift; sourceTree = "<group>"; };
 		C685D298272D9F200063F284 /* school.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school.png; sourceTree = "<group>"; };
 		C685D29A272DD1220063F284 /* School.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = School.swift; sourceTree = "<group>"; };
+		C685D29C272DF4F90063F284 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C6CD9B96272BA00F00B51256 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		C6CD9B99272BA07600B51256 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		C6CD9B9A272BA07600B51256 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				C6DBB34E272B963400B63C1B /* MainViewController.swift */,
 				C685D294272CEA1D0063F284 /* SchoolTableView.swift */,
 				C685D296272CEADA0063F284 /* SchoolTableViewCell.swift */,
+				C685D29C272DF4F90063F284 /* DetailViewController.swift */,
 				C6CD9BAD272BA53100B51256 /* SpinView.swift */,
 				C685D29A272DD1220063F284 /* School.swift */,
 				C6DBB363272B9C3700B63C1B /* Tool.swift */,
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C685D29D272DF4F90063F284 /* DetailViewController.swift in Sources */,
 				C6CD9BB2272BB3AF00B51256 /* Api.swift in Sources */,
 				C6CD9BAE272BA53100B51256 /* SpinView.swift in Sources */,
 				C685D293272CB2080063F284 /* SODAClient.swift in Sources */,

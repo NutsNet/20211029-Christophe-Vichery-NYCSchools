@@ -136,7 +136,7 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
     // SchoolTableViewDelegate
     func mainGetData() {
         mainQueue.async {
-            self.api.getSchools() { error in
+            self.api.apiGetSchools() {
                 DispatchQueue.main.async {
                     self.mainSchoolTv.reloadData()
                     if self.spin.isSpining {
@@ -151,6 +151,13 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
                 }
             }
         }
+    }
+    
+    func mainOpenSchool(school: School) {
+        let detailVc = DetailViewController(school: school)
+        detailVc.modalPresentationStyle = .formSheet
+        detailVc.modalTransitionStyle = .coverVertical
+        self.present(detailVc, animated: true, completion: { detailVc.detailUpdateOrientation() })
     }
     
     func mainSchoolTvRefresh() {
