@@ -53,11 +53,13 @@ class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         schoolTvRc.addTarget(self, action: #selector(tablevRefresh(_:)), for: .valueChanged)
     }
     
+    // Refresh table
     @objc private func tablevRefresh(_ sender: Any) {
         schoolTvRc.endRefreshing()
         schoolTableViewDelegate?.mainSchoolTvRefresh()
     }
     
+    // UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let head = UIView()
         return head

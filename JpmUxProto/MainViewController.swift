@@ -107,6 +107,7 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         mainStart()
     }
     
+    // Manage portrait and landscape mode
     @objc private func mainUpdateOrientation() {
         var htMainFx: CGFloat = 96
         if tool.orientation == .landscape {
@@ -121,6 +122,7 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         
     }
     
+    // Start the app
     private func mainStart() {
         mainUpdateOrientation()
         
@@ -134,6 +136,8 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
     }
     
     // SchoolTableViewDelegate
+    
+    // Get schools with pagination
     func mainGetData() {
         mainQueue.async {
             self.api.apiGetSchools() {
@@ -153,6 +157,7 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         }
     }
     
+    // Display more details and SATs about the school
     func mainOpenSchool(school: School, idx: Int) {
         let detailVc = DetailViewController(school: school, idx: idx)
         detailVc.modalPresentationStyle = .formSheet
@@ -160,6 +165,7 @@ class MainViewController: UIViewController, SchoolTableViewDelegate {
         self.present(detailVc, animated: true, completion: { detailVc.detailUpdateOrientation() })
     }
     
+    // Refresh the school table view
     func mainSchoolTvRefresh() {
         api.apiPageOfSchool = 0
         api.apiArrSchools.removeAll()

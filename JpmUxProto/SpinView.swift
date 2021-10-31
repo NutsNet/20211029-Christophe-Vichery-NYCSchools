@@ -57,6 +57,7 @@ class SpinView: UIView {
         spinStop() { }
     }
     
+    // Stop spinning
     func spinStop(escap:@escaping () -> Void) {
         isSpining = false
         
@@ -71,6 +72,7 @@ class SpinView: UIView {
         }
     }
     
+    // Start spinning
     func spinStart() {
         isHidden = false
         isSpining = true
@@ -81,6 +83,7 @@ class SpinView: UIView {
         }) { (finished) -> Void in }
     }
     
+    // This will loop until we stop spinning
     func spinLoop() {
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: { () -> Void in
             self.spinIv.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi)

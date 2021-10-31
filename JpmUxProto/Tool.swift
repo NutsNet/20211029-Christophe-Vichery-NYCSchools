@@ -80,6 +80,7 @@ class Tool: NSObject {
         }
     }
     
+    // Manage portrait and landscape mode
     @objc private func checkDeviceOrientation() {
         if (UIDevice.current.orientation == .portrait || UIDevice.current.orientation == .portraitUpsideDown) && orientation != .portrait {
             orientation = .portrait

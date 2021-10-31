@@ -304,6 +304,7 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hlDetailMathLbCst, vtDetailMathLbCst])
     }
     
+    // We get the data only once and complete the array of schools in order to not fetch the data when opening the same school
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -349,12 +350,14 @@ class DetailViewController: UIViewController {
         detailDidAppear = true
     }
     
+    // Manage portrait and landscape mode
     @objc func detailUpdateOrientation() {
         DispatchQueue.main.async {
             self.detailSv.contentSize.height = self.detailMathLb.frame.origin.y + self.detailMathLb.frame.height + 48
         }
     }
     
+    // Dismiss detail view controller
     @objc private func detailExitBtAction(sender: UIButton!) {
         dismiss(animated: true, completion: nil)
     }

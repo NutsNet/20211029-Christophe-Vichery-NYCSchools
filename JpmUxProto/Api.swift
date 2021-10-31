@@ -27,6 +27,7 @@ class Api: NSObject {
         super.init()
     }
     
+    // Get schools with pagination to update the array of schools
     func apiGetSchools(escap:@escaping () -> Void) {
         let limit = self.apiPageLimit
         let offset = self.apiPageOfSchool*limit
@@ -64,6 +65,10 @@ class Api: NSObject {
         }
     }
     
+    // Get SATs of a school only when opening the detail view controller
+    // in  : dbn -> id of the school to get the right row
+    // out : school object with only couple parameters
+    //
     func apiGetSats(dbn: String, escap:@escaping (School) -> Void) {
         let query = client.query(dataset: "f9bf-2cp4").filterColumn("dbn", "\(dbn)")
         
