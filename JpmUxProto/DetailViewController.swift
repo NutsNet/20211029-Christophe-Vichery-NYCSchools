@@ -77,6 +77,7 @@ class DetailViewController: UIViewController {
         
         // Title
         detailTitleLb.numberOfLines = 0
+        detailTitleLb.textColor = .white
         detailTitleLb.textAlignment = .center
         detailTitleLb.text = detailSchool.school_name
         detailTitleLb.font =  UIFont(name: "Lato-Bold", size: 16)
@@ -123,6 +124,7 @@ class DetailViewController: UIViewController {
         
         // Neighborhood
         detailNeighborhoodLb.numberOfLines = 0
+        detailNeighborhoodLb.textColor = .white
         detailNeighborhoodLb.textAlignment = .center
         detailNeighborhoodLb.text = detailSchool.neighborhood
         detailNeighborhoodLb.font =  UIFont(name: "Lato-Regular", size: 16)
@@ -140,6 +142,7 @@ class DetailViewController: UIViewController {
         
         // Location
         detailLocationLb.numberOfLines = 0
+        detailLocationLb.textColor = .white
         detailLocationLb.textAlignment = .center
         detailLocationLb.text = detailSchool.location
         detailLocationLb.font =  UIFont(name: "Lato-Regular", size: 16)
@@ -220,6 +223,7 @@ class DetailViewController: UIViewController {
         
         // Overview
         detailOverviewLb.numberOfLines = 0
+        detailOverviewLb.textColor = .white
         detailOverviewLb.textAlignment = .left
         detailOverviewLb.text = detailSchool.overview_paragraph
         detailOverviewLb.font =  UIFont(name: "Lato-Regular", size: 14)
@@ -236,6 +240,7 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hlDetailOverviewLbCst, hrDetailOverviewLbCst, vtDetailOverviewLbCst])
         
         // SAT Takers
+        detailTakersLb.textColor = .white
         detailTakersLb.text = "Num of SAT Test Takers : "
         detailTakersLb.font =  UIFont(name: "Lato-Regular", size: 16)
         detailTakersLb.sizeToFit()
@@ -250,6 +255,7 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hcDetailTakersLbCst, vtDetailTakersLbCst])
         
         // SAT Reading
+        detailReadingLb.textColor = .white
         detailReadingLb.text = "SAT Reading Avg. Score : "
         detailReadingLb.font =  UIFont(name: "Lato-Regular", size: 16)
         detailReadingLb.sizeToFit()
@@ -264,6 +270,7 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hlDetailReadingLbCst, vtDetailReadingLbCst])
         
         // SAT Writing
+        detailWritingLb.textColor = .white
         detailWritingLb.text = "SAT Writing  Avg. Score : "
         detailWritingLb.font =  UIFont(name: "Lato-Regular", size: 16)
         detailWritingLb.sizeToFit()
@@ -278,6 +285,7 @@ class DetailViewController: UIViewController {
         NSLayoutConstraint.activate([hlDetailWritingLbCst, vtDetailWritingLbCst])
         
         // SAT Math
+        detailMathLb.textColor = .white
         detailMathLb.text = "SAT Math       Avg. Score : "
         detailMathLb.font =  UIFont(name: "Lato-Regular", size: 16)
         detailMathLb.sizeToFit()

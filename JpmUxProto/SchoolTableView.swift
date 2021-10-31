@@ -41,6 +41,15 @@ class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         register(SchoolTableViewCell.self as AnyClass, forCellReuseIdentifier: "SchoolTableViewCell")
         
         // Refreash
+        var rcDy: CGFloat = 0
+        if tool.orientation == .landscape {
+            rcDy = -64
+        } else {
+            if tool.device == .xPhone { rcDy = -96 } else { rcDy = -64 }
+        }
+        
+        schoolTvRc.bounds = CGRect(x: schoolTvRc.bounds.origin.x, y: rcDy,
+                                   width: schoolTvRc.bounds.size.width, height: schoolTvRc.bounds.size.height)
         schoolTvRc.addTarget(self, action: #selector(tablevRefresh(_:)), for: .valueChanged)
     }
     
@@ -58,11 +67,7 @@ class SchoolTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
         if tool.orientation == .landscape {
             return 64
         } else {
-            if tool.device == .xPhone {
-                return 96
-            } else {
-                return 64
-            }
+            if tool.device == .xPhone { return 96 } else { return 64 }
         }
     }
     

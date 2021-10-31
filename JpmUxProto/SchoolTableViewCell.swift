@@ -70,9 +70,12 @@ class SchoolTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([wtSchoolTvcIvCst, htSchoolTvcIvCst, hlSchoolTvcIvCst, vtSchoolTvcIvCst])
         
         // Name
+        var mul: CGFloat = 1
+        if tool.device == .iPad || tool.device == .xPad { mul = 1.75 }
+        
         schoolTvcNameLb.numberOfLines = 2
         schoolTvcNameLb.textColor = .darkGray
-        schoolTvcNameLb.font =  UIFont(name: "Lato-Bold", size: 16)
+        schoolTvcNameLb.font =  UIFont(name: "Lato-Bold", size: 16*mul)
         schoolTvcNameLb.translatesAutoresizingMaskIntoConstraints = false
         schoolTvcNameLb.layer.shadowOffset = CGSize.zero
         schoolTvcNameLb.layer.shadowOpacity = 0.25
@@ -87,7 +90,7 @@ class SchoolTableViewCell: UITableViewCell {
         
         // Info
         schoolTvcInfoLb.textColor = .darkGray
-        schoolTvcInfoLb.font =  UIFont(name: "Lato-Italic", size: 14)
+        schoolTvcInfoLb.font =  UIFont(name: "Lato-Italic", size: 14*mul)
         schoolTvcInfoLb.translatesAutoresizingMaskIntoConstraints = false
         schoolTvcInfoLb.layer.shadowOffset = CGSize.zero
         schoolTvcInfoLb.layer.shadowOpacity = 0.25
